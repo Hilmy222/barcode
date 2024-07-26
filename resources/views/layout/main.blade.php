@@ -9,10 +9,9 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="w-[428px] mx-auto">
     @yield('content')
-    <div
-        class="container px-4 mm:px-5 ml:px-8 fixed bottom-0 right-0 left-0 bg-gray-300 mm:py-1 ml:py-2 shadow-lg text-black">
+    <div class="w-[428px] mx-auto px-4 mm:px-5 ml:px-8 fixed bottom-0 bg-gray-300 mm:py-1 ml:py-2 shadow-lg text-black">
         <div class="flex items-center">
             <div class="flex flex-col items-center mr-5 mm:mr-6 ml:mr-9">
                 <img src="/assets/icon/burger.svg" alt="burger" class="h-4">
