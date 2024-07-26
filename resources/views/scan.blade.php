@@ -15,9 +15,9 @@
     #reader {
         position: relative;
         width: 100%;
-        height: 100vh; /* Make the reader take the full viewport height */
-        border: 2px solid #000;
+        height: 100%;
     }
+
     #scanner-overlay {
         position: absolute;
         top: 50%;
@@ -27,22 +27,23 @@
         border: 2px dashed red;
         transform: translate(-50%, -50%);
         pointer-events: none;
+        z-index: 10;
     }
+
     canvas {
         display: none;
+        width: 100%;
+        height: 100vh;
     }
 </style>
 </head>
 <body class="container font-sans antialiased dark:bg-black dark:text-white/50">
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <main class="">
             <div class="">
-                <div id="reader">
-                    <div id="scanner-overlay"></div>
-                </div>
+                <div id="scanner-overlay"></div>
+                <div id="reader"></div>
                 <input type="hidden" name="result" id="result">
             </div>
-        </main>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
