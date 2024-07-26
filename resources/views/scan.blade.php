@@ -14,8 +14,8 @@
 <style>
     #reader {
         position: relative;
-        width: 400px;
-        height: 545px;
+        width: 100%;
+        height: 100vh; /* Make the reader take the full viewport height */
         border: 2px solid #000;
     }
     #scanner-overlay {
@@ -110,57 +110,70 @@
 
         overrideQuaggaCanvas();
 
-        Quagga.init({
-            inputStream: {
-                name: "Live",
-                type: "LiveStream",
-                target: document.querySelector('#reader'),
-                constraints: {  
-                    width: 400,
-                    height: 545,
-                    facingMode: "environment" // Ensures back camera is used
+        function initializeQuagga() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#reader'),
+                    constraints: {
+                        width: window.innerWidth, // Use window's inner width
+                        height: window.innerHeight, // Use window's inner height
+                        facingMode: "environment" // Ensures back camera is used
+                    },
+                    area: {
+                        top: "0%",
+                        right: "0%",
+                        left: "0%",
+                        bottom: "0%"
+                    },
+                    singleChannel: false
                 },
-                area: {
-                    top: "0%",
-                    right: "0%",
-                    left: "0%",
-                    bottom: "0%"
+                locator: {
+                    patchSize: "medium",
+                    halfSample: true
                 },
-                singleChannel: false
-            },
-            locator: {
-                patchSize: "medium",
-                halfSample: true
-            },
-            numOfWorkers: 4,
-            decoder: {
-                readers: [
-                    "code_128_reader",
-                    "upc_reader",
-                    "ean_reader",
-                    "code_39_reader"
-                ]
-            },
-            locate: true
-        }, function(err) {
-            if (err) {
-                console.log("Quagga initialization error:", err); // Log initialization errors
-                return;
-            }
-            console.log("Initialization finished. Ready to start");
-            Quagga.start();
+                numOfWorkers: 4,
+                decoder: {
+                    readers: [
+                        "code_128_reader",
+                        "upc_reader",
+                        "ean_reader",
+                        "code_39_reader"
+                    ]
+                },
+                locate: true
+            }, function(err) {
+                if (err) {
+                    console.log("Quagga initialization error:", err); // Log initialization errors
+                    return;
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+            });
+
+            Quagga.onProcessed(function(result) {
+                var drawingCtx = Quagga.canvas.ctx.overlay;
+                var drawingCanvas = Quagga.canvas.dom.overlay;
+                drawingCanvas.style.display = 'none'; // Hide the canvas
+
+                // Append the canvas to the result div
+                $('#result').append(drawingCanvas);
+            });
+
+            Quagga.onDetected(onDetected);
+        }
+
+        // Initialize Quagga on page load
+        $(document).ready(function() {
+            initializeQuagga();
+
+            // Reinitialize Quagga on window resize to ensure responsiveness
+            $(window).resize(function() {
+                Quagga.stop();
+                initializeQuagga();
+            });
         });
-
-        Quagga.onProcessed(function(result) {
-            var drawingCtx = Quagga.canvas.ctx.overlay;
-            var drawingCanvas = Quagga.canvas.dom.overlay;
-            drawingCanvas.style.display = 'none'; // Hide the canvas
-
-            // Append the canvas to the result div
-            $('#result').append(drawingCanvas);
-        });
-
-        Quagga.onDetected(onDetected);
     </script>
 </body>
 @endsection
