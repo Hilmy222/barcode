@@ -22,6 +22,10 @@ class WelcomeController extends Controller
     {
         return view('scan');
     }
+    public function news()
+    {
+        return view('news');
+    }
 
     public function validasi(Request $request)
     {
