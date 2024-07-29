@@ -26,13 +26,13 @@
         z-index: 10;
     }
     #reader {
-        width: 56%; /* Adjust width to fit 9:16 aspect ratio */
-        height: 100vh; /* Full viewport height */
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%); /* Center the reader */
-    }
+    height: 100vh; /* Full viewport height */
+    width: calc(100vh * (9 / 16)); /* Width based on 9:16 aspect ratio */
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Center the reader */
+}
 
     canvas {
         display: none;
