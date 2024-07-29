@@ -120,8 +120,8 @@
                     type: "LiveStream",
                     target: document.querySelector('#reader'),
                     constraints: {
-                        width: 480, 
-                        height: 720,
+                        width: 420, 
+                        height: 1000,
                         facingMode: "environment" 
                     },
                     area: {
