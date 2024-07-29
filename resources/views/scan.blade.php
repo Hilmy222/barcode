@@ -13,25 +13,25 @@
 <!-- Styles -->
 <style>
 
-#reader {
+
+    #scanner-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 60%;
+        height: 20%;
+        border: 2px dashed red;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 10;
+    }
+    #reader {
     height: 100vh; /* Full viewport height */
     width: calc(100vh * (9 / 16)); /* Width based on 9:16 aspect ratio */
     position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%); /* Center the reader */
-}
-
-#scanner-overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 60%;
-    height: 20%;
-    border: 2px dashed red;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 10;
 }
 
     canvas {
@@ -113,76 +113,67 @@
 
         overrideQuaggaCanvas();
 
-        function adjustReaderSize() {
-            const reader = document.getElementById('reader');
-            const viewportHeight = window.innerHeight;
-            const desiredWidth = viewportHeight * (9 / 16);
-            reader.style.width = `${desiredWidth}px`;
-             reader.style.height = `${viewportHeight}px`;
-}
+        function initializeQuagga() {
+            Quagga.init({
+                inputStream: {
+                    name: "Live",
+                    type: "LiveStream",
+                    target: document.querySelector('#reader'),
+                    constraints: {
+                        width: 410, 
+                        height: 760,
+                        facingMode: "environment" 
+                    },
+                    area: {
+                        top: "0%",
+                        right: "0%",
+                        left: "0%",
+                        bottom: "0%"
+                    },
+                    singleChannel: false
+                },
+                locator: {
+                    patchSize: "medium",
+                    halfSample: true
+                },
+                numOfWorkers: 4,
+                decoder: {
+                    readers: [
+                        "code_128_reader",
+                        "upc_reader",
+                        "ean_reader",
+                        "code_39_reader"
+                    ]
+                },
+                locate: true
+            }, function(err) {
+                if (err) {
+                    console.log("Quagga initialization error:", err); 
+                    return;
+                }
+                console.log("Initialization finished. Ready to start");
+                Quagga.start();
+            });
 
-function initializeQuagga() {
-    Quagga.init({
-        inputStream: {
-            name: "Live",
-            type: "LiveStream",
-            target: document.querySelector('#reader'),
-            constraints: {
-                width: window.innerWidth, // Set width to match the screen width
-                height: window.innerHeight, // Set height to match the screen height
-                facingMode: "environment"
-            },
-            area: {
-                top: "0%",
-                right: "0%",
-                left: "0%",
-                bottom: "0%"
-            },
-            singleChannel: false
-        },
-        locator: {
-            patchSize: "medium",
-            halfSample: true
-        },
-        numOfWorkers: 4,
-        decoder: {
-            readers: [
-                "code_128_reader",
-                "upc_reader",
-                "ean_reader",
-                "code_39_reader"
-            ]
-        },
-        locate: true
-    }, function(err) {
-        if (err) {
-            console.log("Quagga initialization error:", err); 
-            return;
+            Quagga.onProcessed(function(result) {
+                var drawingCtx = Quagga.canvas.ctx.overlay;
+                var drawingCanvas = Quagga.canvas.dom.overlay;
+                drawingCanvas.style.display = 'none'; 
+
+                $('#result').append(drawingCanvas);
+            });
+
+            Quagga.onDetected(onDetected);
         }
-        console.log("Initialization finished. Ready to start");
-        Quagga.start();
-    });
 
-    Quagga.onProcessed(function(result) {
-        var drawingCanvas = Quagga.canvas.dom.overlay;
-        drawingCanvas.style.display = 'none'; 
-        $('#result').append(drawingCanvas);
-    });
+        $(document).ready(function() {
+            initializeQuagga();
 
-    Quagga.onDetected(onDetected);
-}
-
-$(document).ready(function() {
-    adjustReaderSize();
-    initializeQuagga();
-
-    $(window).resize(function() {
-        adjustReaderSize();
-        Quagga.stop();
-        initializeQuagga();
-    });
-});
-
+            $(window).resize(function() {
+                Quagga.stop();
+                initializeQuagga();
+            });
+        });
     </script>
 </body>
 </html>
