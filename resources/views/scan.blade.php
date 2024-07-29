@@ -13,38 +13,44 @@
 <!-- Styles -->
 <style>
 
-
-    #scanner-overlay {
+#scanner-overlay {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 60%;
+        width: 80%; /* Adjust width as needed */
         height: 20%;
         border: 2px dashed red;
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 10;
     }
-    #reader {
-    height: 100vh; /* Full viewport height */
-    width: calc(100vh * (9 / 16)); /* Width based on 9:16 aspect ratio */
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%); /* Center the reader */
-}
+ 
 
     canvas {
         display: none;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        display: block; /* Make canvas visible */
     }
 </style>
 </head>
-<body class="w-full h-full mx-auto">
-    <div class="w-full h-full mx-auto fixed left-0 right-0 max-w-screen-sm ">
-        <div id="reader">
+<body>
+    <div class="mx-auto w-[428px]">
+        <div>
+            <div class="bg-green-700 opacity-700">
+                <div class="flex items-center justify-center py-4 pb-3">
+                    <h1 class=" text-center text-lg font-bold text-white tracking-wider">About us</h1>
+                    <div class="flex items-center absolute right-3 space-x-6">
+                        <img src="/assets/icon/setting.svg" class="h-5 w-5" alt="">
+                        <a href="/home">
+                            <img src="/assets/icon/home.svg" class="h-4 w-4" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="fixed w-[428px] h-full">
+        <div id="reader"></div>
             <div id="scanner-overlay"></div>
         </div>
         <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
@@ -120,16 +126,16 @@
                     type: "LiveStream",
                     target: document.querySelector('#reader'),
                     constraints: {
-                        width: 410, 
-                        height: 760,
+                        width: 430,
+                        height: 720,
                         facingMode: "environment" 
-                    },
-                    area: {
-                        top: "0%",
-                        right: "0%",
-                        left: "0%",
-                        bottom: "0%"
-                    },
+                    }, 
+                    area: { // defines rectangle of the detection/localization area
+    top: "0%",    // top offset
+    right: "0%",  // right offset
+    left: "0%",   // left offset
+    bottom: "0%"  // bottom offset
+  }, 
                     singleChannel: false
                 },
                 locator: {
@@ -170,9 +176,10 @@
             initializeQuagga();
 
             $(window).resize(function() {
-                Quagga.stop();
-                initializeQuagga();
-            });
+    Quagga.stop();
+    initializeQuagga();
+});
+
         });
     </script>
 </body>
