@@ -43,7 +43,7 @@
 </style>
 </head>
 <body class="w-full h-full mx-auto">
-    <div class="w-full h-full mx-auto fixed left-0 right-0 bg-gray-300 max-w-screen-sm ">
+    <div class="w-full h-full mx-auto fixed left-0 right-0 max-w-screen-sm ">
         <div id="reader">
             <div id="scanner-overlay"></div>
         </div>
@@ -95,10 +95,9 @@
                     }
                 });
 
-                // Reset the flag after a delay to allow for new scans
                 setTimeout(() => {
                     alertShown = false;
-                }, 5000); // Adjust the delay as needed
+                }, 5000); 
             }
         }
 
@@ -121,9 +120,9 @@
                     type: "LiveStream",
                     target: document.querySelector('#reader'),
                     constraints: {
-                        width: 720, // Set width for 9:16 aspect ratio
-                        height: 1280, // Set height for 9:16 aspect ratio
-                        facingMode: "environment" // Ensures back camera is used
+                        width: 480, 
+                        height: 720,
+                        facingMode: "environment" 
                     },
                     area: {
                         top: "0%",
@@ -149,7 +148,7 @@
                 locate: true
             }, function(err) {
                 if (err) {
-                    console.log("Quagga initialization error:", err); // Log initialization errors
+                    console.log("Quagga initialization error:", err); 
                     return;
                 }
                 console.log("Initialization finished. Ready to start");
@@ -159,20 +158,17 @@
             Quagga.onProcessed(function(result) {
                 var drawingCtx = Quagga.canvas.ctx.overlay;
                 var drawingCanvas = Quagga.canvas.dom.overlay;
-                drawingCanvas.style.display = 'none'; // Hide the canvas
+                drawingCanvas.style.display = 'none'; 
 
-                // Append the canvas to the result div
                 $('#result').append(drawingCanvas);
             });
 
             Quagga.onDetected(onDetected);
         }
 
-        // Initialize Quagga on page load
         $(document).ready(function() {
             initializeQuagga();
 
-            // Reinitialize Quagga on window resize to ensure responsiveness
             $(window).resize(function() {
                 Quagga.stop();
                 initializeQuagga();
