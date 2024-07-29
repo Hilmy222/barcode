@@ -12,40 +12,37 @@
 
 <!-- Styles -->
 <style>
-    #reader {
-        position: relative;
-        width: 100%;
-        height: 100%;
-    }
+
 
     #scanner-overlay {
         position: absolute;
         top: 50%;
         left: 50%;
-        width: 80%;
-        height: 30%;
+        width: 60%;
+        height: 20%;
         border: 2px dashed red;
         transform: translate(-50%, -50%);
         pointer-events: none;
         z-index: 10;
     }
+  
 
     canvas {
         display: none;
         width: 100%;
-        height: 100vh;
+        height: 100%;
+        overflow: hidden;
     }
 </style>
 </head>
-<body class="container font-sans antialiased dark:bg-black dark:text-white/50">
-    <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-            <div class="">
+<body class="w-[428px] mx-auto">
+    <div class="w-auto mx-auto fixed left-0 right-0 bg-gray-300 max-h-screen max-w-screen-sm ">
+        
+        <div id="reader">
                 <div id="scanner-overlay"></div>
-                <div id="reader"></div>
-                <input type="hidden" name="result" id="result">
-            </div>
+        </div>
+                <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -177,4 +174,5 @@
         });
     </script>
 </body>
+</html>
 @endsection
