@@ -25,7 +25,14 @@
         pointer-events: none;
         z-index: 10;
     }
-  
+    #reader {
+        width: 56%; /* Adjust width to fit 9:16 aspect ratio */
+        height: 100vh; /* Full viewport height */
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%); /* Center the reader */
+    }
 
     canvas {
         display: none;
@@ -36,12 +43,11 @@
 </style>
 </head>
 <body class="w-full h-full mx-auto">
-        <div class="w-full h-full mx-auto bg-gray-300 fixed left-0 right-0">
-
+    <div class="w-full h-full mx-auto fixed left-0 right-0 bg-gray-300 max-w-screen-sm ">
         <div id="reader">
-                <div id="scanner-overlay"></div>
+            <div id="scanner-overlay"></div>
         </div>
-                <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
+        <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>
@@ -115,8 +121,8 @@
                     type: "LiveStream",
                     target: document.querySelector('#reader'),
                     constraints: {
-                        width: window.innerWidth, // Use window's inner width
-                        height: window.innerHeight, // Use window's inner height
+                        width: 720, // Set width for 9:16 aspect ratio
+                        height: 1280, // Set height for 9:16 aspect ratio
                         facingMode: "environment" // Ensures back camera is used
                     },
                     area: {
