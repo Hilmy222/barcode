@@ -35,9 +35,9 @@
     }
 </style>
 </head>
-<body class="w-[428px] mx-auto">
-    <div class="w-auto mx-auto fixed left-0 right-0 bg-gray-300 max-h-screen max-w-screen-sm ">
-        
+<body class="w-full h-full mx-auto">
+        <div class="w-full h-full mx-auto bg-gray-300 fixed left-0 right-0">
+
         <div id="reader">
                 <div id="scanner-overlay"></div>
         </div>
