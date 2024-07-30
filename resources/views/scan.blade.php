@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <div>
+        <div class="bg-green-700 h-screen">
             <div class="bg-green-800 opacity-700">
                 <div class="flex items-center justify-center py-4 pb-3">
                     <div class="font-bold pt-1 pb-3 text-white">
@@ -23,10 +23,9 @@
                     </div>
                 </div>
             </div>
-            <div  class=" bg-green-700 min-h-screen">
+            <div class="bg-green-700 h-[12vh]">
 
-                <div>
-                    <div class="bg-green-700 mb-10 shadow-2xl ">
+                    <div class="bg-green-700 mb-10 shadow-2xl w-full">
                         <div class="flex items-center justify-center py-4 pb-3">
                             <h1 class=" text-center text-lg font-bold text-white tracking-wider">Scan Product!</h1>
                             <div class="flex items-center absolute right-3 space-x-6">
@@ -37,11 +36,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                    <div class="mt-20" id="reader"></div>
+                <div id="reader"></div>
                     <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
-                </div>
+        </div>
         </div>
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
