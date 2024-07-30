@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div  class="p-2  bg-green-700 min-h-screen">
+            <div  class=" bg-green-700 min-h-screen">
 
                 <div>
                     <div class="bg-green-700 mb-10 shadow-2xl ">
