@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <div>
+        <div class="bg-green-700 min-h-screen">
             <div class="bg-green-800 opacity-700">
                 <div class="flex items-center justify-center py-4 pb-3">
                     <div class="font-bold pt-1 pb-3 text-white">
@@ -24,7 +24,6 @@
                 </div>
             </div>
 
-            <div class="bg-green-700 min-h-screen">
                 <div>
                     <div class="bg-green-700 mb-10 shadow-2xl ">
                         <div class="flex items-center justify-center py-4 pb-3">
@@ -39,11 +38,8 @@
                     </div>
                 </div>
 
-                    <div id="reader"></div>
+                    <div class="my-20" id="reader"></div>
                     <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
-              </div>
-
-            </div>
         </div>
         <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
