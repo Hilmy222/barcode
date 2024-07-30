@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="bg-green-700">
+            <div class="bg-green-700 min-h-screen">
                 <div>
                     <div class="bg-green-700 mb-10 shadow-2xl ">
                         <div class="flex items-center justify-center py-4 pb-3">
@@ -39,11 +39,8 @@
                     </div>
                 </div>
 
-                <div class=" bg-green-700 py-10 ml:py-36 mt-24 ml:mt-12 mm:mt-0  mm:py-14">
                     <div id="reader"></div>
                     <input class="max-w-screen-sm max-h-screen" type="hidden" name="result" id="result">
-                </div>
-                <div class="bg-green-700 py-[170px] mm:py-40 ml:py-36"></div>
               </div>
 
             </div>
