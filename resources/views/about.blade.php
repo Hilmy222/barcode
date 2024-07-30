@@ -11,8 +11,8 @@
 <body>
     <div>
         <div class="bg-green-700 opacity-700">
-            <div class="flex items-center justify-center py-4 pb-3">
-                <h1 class=" text-center text-lg font-bold text-white tracking-wider">About us</h1>
+            <div class="flex items-center justify-center py-9 pb-3">
+                <h1 class=" text-center text-xl font-bold text-white tracking-wider">About us</h1>
                 <div class="flex items-center absolute right-3 space-x-6">
                     <img src="/assets/icon/setting.svg" class="h-5 w-5" alt="">
                     <a href="/home">

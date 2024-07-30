@@ -26,6 +26,10 @@ class WelcomeController extends Controller
     {
         return view('news');
     }
+    public function daftar()
+    {
+        return view('daftar');
+    }
 
     public function validasi(Request $request)
     {

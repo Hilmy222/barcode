@@ -22,7 +22,7 @@
         </div>
     </div>
     @section('content')
-        <div class="container p-2 bg-gray-100 mx-auto">
+        <div class="p-2 bg-gray-100 mx-auto min-h-screen">
             <div class="grid grid-cols-2 gap-3 mb-28">
                 <a href="https://nothanksshop.myshopify.com/products/unisex-heavyweight-t-shirt">
                     <div class="flex flex-col items-center gap-2">
